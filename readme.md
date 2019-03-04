@@ -4,8 +4,8 @@
 
 
 ```
-$git clone 
-$cd 
+$git clone git@github.com:leviathan88/digit_jumping_webassembly.git
+$cd digit_jumping_webassembly
 $npm install
 $npm start
 visit http://localhost:8080/
