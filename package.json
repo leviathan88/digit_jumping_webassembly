@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build-wasm": "cargo +nightly build --target wasm32-unknown-unknown && wasm-bindgen target/wasm32-unknown-unknown/debug/digit_jumping.wasm --out-dir client/wasm"
+    "build-wasm": "cargo +nightly build --target wasm32-unknown-unknown && wasm-bindgen target/wasm32-unknown-unknown/debug/digit_jumping.wasm --out-dir client/wasm",
+    "build-wasm-prod": "cargo +nightly build --release --target wasm32-unknown-unknown && wasm-bindgen target/wasm32-unknown-unknown/release/digit_jumping.wasm --out-dir client/wasm"
   },
   "author": "Elvis Dedic",
   "license": "ISC",

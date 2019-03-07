@@ -53,7 +53,63 @@ export function hello(arg0) {
 
 }
 
-export function __wbindgen_throw(ptr, len) {
-    throw new Error(getStringFromWasm(ptr, len));
+const heap = new Array(32);
+
+heap.fill(undefined);
+
+heap.push(undefined, null, true, false);
+
+let heap_next = heap.length;
+
+function addHeapObject(obj) {
+    if (heap_next === heap.length) heap.push(heap.length + 1);
+    const idx = heap_next;
+    heap_next = heap[idx];
+
+    heap[idx] = obj;
+    return idx;
+}
+/**
+* @param {any} arg0
+* @param {any} arg1
+* @param {any} arg2
+* @returns {number}
+*/
+export function digit_jumping_optimized(arg0, arg1, arg2) {
+    return wasm.digit_jumping_optimized(addHeapObject(arg0), addHeapObject(arg1), addHeapObject(arg2));
+}
+
+/**
+* @param {any} arg0
+* @param {any} arg1
+* @param {any} arg2
+* @returns {number}
+*/
+export function digit_jumping_unomptimized(arg0, arg1, arg2) {
+    return wasm.digit_jumping_unomptimized(addHeapObject(arg0), addHeapObject(arg1), addHeapObject(arg2));
+}
+
+function dropObject(idx) {
+    if (idx < 36) return;
+    heap[idx] = heap_next;
+    heap_next = idx;
+}
+
+export function __wbindgen_object_drop_ref(i) { dropObject(i); }
+
+function getObject(idx) { return heap[idx]; }
+
+let cachegetUint32Memory = null;
+function getUint32Memory() {
+    if (cachegetUint32Memory === null || cachegetUint32Memory.buffer !== wasm.memory.buffer) {
+        cachegetUint32Memory = new Uint32Array(wasm.memory.buffer);
+    }
+    return cachegetUint32Memory;
+}
+
+export function __wbindgen_json_serialize(idx, ptrptr) {
+    const ptr = passStringToWasm(JSON.stringify(getObject(idx)));
+    getUint32Memory()[ptrptr / 4] = ptr;
+    return WASM_VECTOR_LEN;
 }
 
