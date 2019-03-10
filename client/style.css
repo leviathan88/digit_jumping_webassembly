@@ -1,0 +1,189 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  height: 100%;  
+}
+
+body {
+  font-weight: 400;
+  line-height: 1.7;  
+  box-sizing: border-box;
+  height: 100%;
+  font-family: 'Srisakdi', cursive;
+  background-color: #f5f5f5;
+}
+
+button:focus, button:active, input:focus, input:active, textarea:focus, textarea:active, select:focus, select:active  {
+  outline: none;
+}
+
+
+/* MAIN */
+#app {
+  height: 100%;
+  width: 100%;  
+  display: grid;
+  justify-items: center;
+}
+
+#main-container {
+  height: 100%;  
+  display: grid;
+  grid-template-rows: repeat(6, auto);
+  justify-content: center;
+  justify-items: center;
+  grid-row-gap: 25px;
+  max-width: 1200px;
+  margin: 40px;
+  margin-top: 0px;
+  
+}
+
+.codesignal-logo {
+  background-image: url('./assets/codesignal.jpg');
+  background-repeat: no-repeat;
+  height: 50px;
+  width: 50px;
+  background-size: contain;
+  transform: rotate(45deg);
+  margin-left: 405px;
+  position: absolute;
+  margin-top: -40px;
+  border-radius: 50%;
+  border: 1px solid darkgreen;
+  cursor: pointer;
+  
+}
+
+.description-container {
+  display: grid;
+  justify-items: center;
+  grid-gap: 20px;
+}
+
+.description-container > p {
+  font-size: 12px;
+}
+
+.info-container {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  grid-gap: 20px;    
+}
+
+.item-container {
+  display: grid;
+  grid-template-columns: repeat(4, 300px);
+  grid-gap: 40px;
+  justify-items: center;
+}
+
+@media only screen and (max-width: 1300px) {
+  .item-container  {
+    grid-template-columns: repeat(2, 300px);
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .item-container  {
+    grid-template-columns: 300px;
+    grid-template-rows: repeat(4, auto);
+  }
+}
+
+.item-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+}
+
+.item-value {
+  color: #ca8c8c;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+}
+
+.test-item {
+  border-radius: 15px;
+  height: 300px;
+  width: 300px;
+  background-color: cornsilk;
+  display: grid;
+  justify-items: center;
+  grid-gap: 5px;
+  padding: 15px;
+}
+
+.test-button {
+  background-color: #448dfb;
+  border-radius: 20px;
+  width: 80%;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  height: 30px;
+}
+
+.test-button:hover {
+  transform: scaleY(20px);
+}
+
+.item-header {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+/* LOADING */
+.loading-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;       
+  align-items: center;  
+}
+
+.loading-img {
+  background: url('./assets/webassembly.png') no-repeat;
+  width: 275px;
+  height: 275px;
+  animation: rotate 3.5s infinite linear;
+  transform-origin: center;
+  border-radius: 50%;
+}
+
+/* ANIMATION */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* COMMON */
+h1 {
+  font-size: 50px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 25px;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 16px;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+}
+

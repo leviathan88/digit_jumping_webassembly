@@ -77,24 +77,26 @@ export function digitJumpingOptimized(grid, start, finish) {
 
 export function digitJumpingUnoptimized(grid, start, finish) {
   const format = (x,y) => `${x},${y}`
+
+  
   const digits = new Map()
-  
-  for (let x = 0; x < grid.length; x++) {
-    for (let y = 0; y < grid[x].length; y++) {
-      const digit = grid[x][y]
-      const digitArr = digits.get(digit) || digits.set(digit, []).get(digit)
-      digitArr.push([x,y])
-    }
-  }
-  
   const finishFormated = format(finish[0], finish[1])
   
+  for (let x = 0; x < grid.length; x++) {
+    for (let y = 0; y < grid[x].length; y++) {      
+      const digit = grid[x][y]
+      const digitArr = digits.get(digit) || digits.set(digit, []).get(digit)
+      digitArr.push([x,y])     
+    }
+  }   
+
   const END = 'E'
   const [s1, s2] = start
   const added = new Map([[format(s1,s2), true]])
   const graph = [[s1,s2], END]
   
-  let stepCount = 0  
+  let stepCount = 0
+  
   while (graph.length) {
     const currentCoordinate = graph.shift()
     
@@ -105,11 +107,12 @@ export function digitJumpingUnoptimized(grid, start, finish) {
       }
       
     } else {
-      const [x, y] = currentCoordinate
-      const formated = format(x,y)      
-      const connections = digits.get(grid[x][y])      
-      if (formated === finishFormated) return stepCount      
-      if (connections.length) {
+      const [x, y] = currentCoordinate      
+      const formated = format(x,y)
+      const connections = digits.get(grid[x][y])
+      
+      if (formated == finishFormated) return stepCount
+      if (connections && connections.length) {
         for (const conn of connections) {
           const [x1, y1] = conn
           
@@ -122,23 +125,25 @@ export function digitJumpingUnoptimized(grid, start, finish) {
         connections.length = 0
       }
 
-      const moves = [getGridValue(x, y+1), getGridValue(x, y-1), getGridValue(x+1, y), getGridValue(x-1, y)].filter(value => value)
+      const moves = [getGridValue(x, y+1), getGridValue(x, y-1), getGridValue(x+1, y), getGridValue(x-1, y)].filter(value => value !== false)
+      
       for (const move of moves) {
-        const [x1, y1] = move
+        const [x1, y1] = move          
         const f = format(x1, y1)
         if (!added.has(f)) {
           added.set(f, true)
           graph.push([x1, y1])
         }
       }
-
-    }
+    }    
   }
 
   function getGridValue(x,y) {
-    if (grid[x] && grid[x][y]) {
+    if (grid[x] && grid[x][y] >= 0) {
       return [x,y]
     }
     return false
   }
+  
+  return 0
 }
