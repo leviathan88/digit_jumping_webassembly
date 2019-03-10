@@ -10,7 +10,7 @@
   },
   "author": "Elvis Dedic",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -26,6 +26,5 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
-  },
-  "dependencies": {}
+  }
 }
